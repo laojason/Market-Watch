@@ -8,10 +8,15 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "intl": "^1.2.5",
     "node-sass": "^6.0.1",
+    "plotly.js": "^2.2.1",
     "react": "^17.0.2",
     "react-bootstrap-validation": "^0.1.11",
     "react-dom": "^17.0.2",
+    "react-plotly.js": "^2.5.1",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
@@ -38,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }

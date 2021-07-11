@@ -3,14 +3,18 @@ import React, { useState} from 'react'
 const Search = ({ getStock }) => {
     const [text, setText] = useState('')
 
-    const onSearch = (v) => {
+    const onTextChange = (v) => {
         setText(v)
-        getStock(v)
+    }
+
+    const onSearch = () => {
+        getStock(text)
     }
     return (
         <section className='Search'>
             <form>
-                <input type='text' className='form-control' placeholder='Search' autoFocus value={text} onChange={(e) => onSearch(e.target.value)}/>
+                <input type='text' className='form-control' placeholder='Search' autoFocus value={text} onChange={(e) => onTextChange(e.target.value)}/>
+                <input type ="button" value="Search" onClick={()=>onSearch()}/>
             </form>
         </section>
     )
