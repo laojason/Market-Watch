@@ -15,29 +15,28 @@ const App = () => {
 
     const [StockData, setStockData] = useState({})
     const [StockWatchList, setStockWatchList] = useState([])
+    const [NumberOfStocks, setNumberOfStocks] = useState(0)
+
     const [isLoading, setIsLoading] = useState([true])
     const [isListLoading, setisListLoading] = useState([true])
     const [stock, setStock] = useState('')
 
     useEffect(() => {
         const fetchWatchList = async () => {
-            const result = await axios('http://localhost:4000/api/users')         
-            const stockHolder = []
-   
+            const result = await axios('http://localhost:4000/api/users')            
             for (let key in result.data[0]){
                 if (key === 'watchList'){
                     result.data[0][key].forEach(async item => {
                         const API_KEY = 'O7K982YJCI1VNZZ0'
-                        const stocks = await axios(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${item}&apikey=${API_KEY}`)            
-                        stockHolder.push(stocks.data)   
+                        const stocks = await axios(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${item}&apikey=${API_KEY}`)
+                        setStockWatchList(prevStock  => [...prevStock, stocks.data])        
                         }
-                    )
-                    setStockWatchList(stockHolder)
-                    setIsLoading(false)
-                    
+                    )                 
                 }
             }
-            setStockWatchList(stockHolder)
+            setNumberOfStocks(result.data[0]['watchList'].length)
+            setisListLoading(false)
+
         }
         fetchWatchList()
     }, [])
@@ -56,7 +55,7 @@ const App = () => {
         <div className="stock-app">
             <Header/>
             <Search getStock={(v) => setStock(v)}/>
-            <WatchList isListLoading={setIsLoading} StockList={StockWatchList}/>
+            <WatchList isListLoading={isListLoading} StockList={StockWatchList} NumberOfStocks={NumberOfStocks}/>
             <StockList isLoading={isLoading} stock={StockData} />
             <StockChart isLoading={isLoading} stock={StockData} />
         </div>
