@@ -10,7 +10,7 @@ app.get('/api/users', (req, res) => {
         {
             id: 1, 
             username: 'jlao',
-            watchList: ['AMD', 'AMZN']
+            watchList: ['AMD', 'AMZN', 'AMC', 'GME']
         }
     ]
     res.json(users);

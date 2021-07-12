@@ -1,28 +1,24 @@
 import React, { useState, useEffect} from 'react';
 import StockInfo from './StockInfo';
 
-const WatchList = ({ isListLoading, StockList }) => {
+const WatchList = ({ isListLoading, StockList, NumberOfStocks }) => {
 
     const [StockParsed, setStockParsed] = useState([])
-    console.log('my watch list is ')
-    console.log(StockList)
 
     useEffect(() => {
-        setStockParsed(StockList)
-        for (let stocks in StockList){
-            console.log('my watch list is in loop is  ')
-
-            console.log(stocks)
-            // if (stock['Meta Data'] !== undefined){
-            //     setStockParsed([{"price": stock['Time Series (Daily)'][stock['Meta Data']['3. Last Refreshed']]['4. close'], 
-            //                      "symbol": stock['Meta Data']['2. Symbol'],
-            //                      "volume": stock['Time Series (Daily)'][stock['Meta Data']['3. Last Refreshed']]['6. volume']
-            //     }])
-            // }
+        if (StockList.length === NumberOfStocks){
+            StockList.forEach(function (stocks) {
+                if (stocks['Meta Data'] !== undefined){
+                    setStockParsed(prevStock => [...prevStock, {"price": stocks['Time Series (Daily)'][stocks['Meta Data']['3. Last Refreshed']]['4. close'], 
+                                     "symbol": stocks['Meta Data']['2. Symbol'],
+                                     "volume": stocks['Time Series (Daily)'][stocks['Meta Data']['3. Last Refreshed']]['6. volume']
+                    }])
+                }
+            });
         }
 
-    }, [StockList])    
-    return isListLoading ? (<h1> Loading... </h1>) : 
+    }, [StockList, NumberOfStocks])    
+    return isListLoading ? (<h1> Loading Watchlist... </h1>) : 
     (
         <div>
             {StockParsed.map((info) => (
