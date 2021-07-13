@@ -1,14 +1,18 @@
 import React, { useState} from 'react'
+import axios from 'axios'
 
-const Search = ({ getStock }) => {
+const Search = ({ getStock, watchListArray }) => {
     const [text, setText] = useState('')
 
     const onTextChange = (v) => {
         setText(v)
     }
 
-    const onSearch = () => {
+    const onSearch = async () => {
         getStock(text)
+        watchListArray.push(text)
+        const watchListUpdate = { watchList: watchListArray}
+        await axios.patch('http://localhost:4000/users/jlao', watchListUpdate)
     }
     return (
         <section className='Search'>

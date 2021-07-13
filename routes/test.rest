@@ -1,0 +1,21 @@
+GET http://localhost:4000/users/jlao
+
+###
+POST http://localhost:4000/users
+Content-Type: application/json
+
+{
+    "userid": "jlao",
+    "watchList": ["AMD", "AMZN", "GME", "AMC"] 
+}
+
+###
+DELETE http://localhost:4000/users/jlao
+
+###
+PATCH http://localhost:4000/users/jlao
+Content-Type: application/json
+
+{
+    "watchList": ["AMD", "AMZN", "GME", "AMC", "TSLA", "DIS"] 
+}
