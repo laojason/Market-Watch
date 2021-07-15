@@ -5,6 +5,7 @@ const WatchList = ({ isListLoading, StockList, watchListArray }) => {
 
     const [StockParsed, setStockParsed] = useState([])
 
+    //grabs all info from api call, parsed
     useEffect(() => {
         if (StockList.length === watchListArray.length){
             StockList.forEach(function (stocks) {
@@ -18,12 +19,19 @@ const WatchList = ({ isListLoading, StockList, watchListArray }) => {
             });
         }
 
-    }, [StockList, watchListArray])    
+    }, [StockList, watchListArray])
+    
+    //delete stock
+    const deleteFromWatchList = (ticker) =>{
+        setStockParsed(StockParsed.filter((stockItem)=> stockItem.symbol !==ticker ))    
+    }
+
+    
     return isListLoading ? (<h1> Loading Watchlist... </h1>) : 
     (
-        <div>
+        <div className='container mt-5'>
             {StockParsed.map((info) => (
-                <StockInfo key={`${info.key}_${info.symbol}`} stock={info} watchListArr={watchListArray}> </StockInfo>
+                <StockInfo key={`${info.key}_${info.symbol}`} stock={info} watchListArr={watchListArray} onDeleteStock={deleteFromWatchList}> </StockInfo>
             ))}
         </div>
     )

@@ -33,7 +33,7 @@ router.delete('/:userid', getUser, async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
-//updating user
+//updating user, mostly used to update watch list atm
 router.patch('/:userid', getUser, async (req, res) => {
     if(req.body.watchList != null){
         res.user.watchList = req.body.watchList 

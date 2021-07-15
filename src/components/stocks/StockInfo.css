@@ -1,0 +1,38 @@
+.center-card{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    box-shadow: none;
+    border-bottom: solid;
+}
+
+.inline-icon{
+    display:contents !important;
+}
+
+.close{
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+button, input {
+    overflow: visible;
+}
+
+button, select {
+    text-transform: none;
+}
+
+.close:hover {
+    color: #ff0000;
+}
