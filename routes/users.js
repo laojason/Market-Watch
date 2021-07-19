@@ -38,6 +38,9 @@ router.patch('/:userid', getUser, async (req, res) => {
     if(req.body.watchList != null){
         res.user.watchList = req.body.watchList 
     }
+    else if (req.body.cryptoList != null){
+        res.user.cryptoList = req.body.cryptoList 
+    }
     try{
         const updatedUser = await res.user.save()
         res.json(updatedUser)

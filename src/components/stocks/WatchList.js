@@ -7,6 +7,9 @@ const WatchList = ({ isListLoading, StockList, watchListArray }) => {
 
     //grabs all info from api call, parsed
     useEffect(() => {
+        if(StockList.length === 0){
+            setStockParsed([])    
+        }
         if (StockList.length === watchListArray.length){
             StockList.forEach(function (stocks) {
                 if (stocks['Global Quote'] !== undefined){

@@ -1,7 +1,7 @@
 import React from 'react'
-import './About.css'
+import './Crypto.css'
 
-const About = () => {
+const Crpyto = () => {
     return (
         <div>
             <div class="about-section">
@@ -13,4 +13,4 @@ const About = () => {
     )
 }
 
-export default About
+export default Crpyto

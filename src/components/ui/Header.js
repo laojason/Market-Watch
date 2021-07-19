@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import './Header.css'
 
-const Header = ({getSearch}) => {
+const Header = ({getSearch, SearchValue}) => {
     //Menu click for when screen size gets smaller
     const [MenuClick, setMenuClick] = useState(false)
-    const [SearchClick, setSearchClick] = useState(false)
     //checks if search button is clicked
     const [Button, setButton] = useState(true)
 
@@ -14,8 +13,7 @@ const Header = ({getSearch}) => {
 
     //returns to main function to set the search click
     const handleSearch = () => {
-        setSearchClick(!SearchClick)
-        getSearch(SearchClick)
+        getSearch(!SearchValue)
     }
 
     const showButton = () => {
@@ -47,12 +45,12 @@ const Header = ({getSearch}) => {
                     <ul className={MenuClick ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
                             <Link to='/' className='nav-links' onClick={closeMenu}>
-                                Home
+                                Watch List
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/about' className='nav-links' onClick={closeMenu}>
-                                About
+                            <Link to='/Crypto' className='nav-links' onClick={closeMenu}>
+                                Crypto
                             </Link>
                         </li>
                     </ul>

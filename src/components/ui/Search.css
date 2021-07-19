@@ -223,3 +223,12 @@
     text-align: center;
     color: #888;
 }
+
+.error-message {
+    width: 35%;
+    margin: auto;
+}
+
+.close-btn{
+    float:right;
+}

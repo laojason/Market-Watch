@@ -7,6 +7,9 @@ const userSchema = new mongoose.Schema({
     },
     watchList:{
         type: [String]
+    },
+    cryptoList:{
+        type: [String]
     }
 })
 

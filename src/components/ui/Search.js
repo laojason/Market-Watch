@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import './Search.css'
 import SelectSearch from 'react-select-search';
@@ -6,7 +6,7 @@ import fuzzySearch from '../stocks/fuzzySearch'
 
 
 const Search = ({ getStock, watchListArray }) => {
-    // const [text, setText] = useState('testing')
+    const [AlreadyAdded, setAlreadyAdded] = useState(false)
 
     // const onTextChange = (v) => {
     //     setText(v)
@@ -15,10 +15,16 @@ const Search = ({ getStock, watchListArray }) => {
     
     //when a stock ticker is selected, it'll add the stock to the watch list
     const onStockSelect = async (e) => {
-        getStock(e)
-        watchListArray.push(e)
-        const watchListUpdate = { watchList: watchListArray}
-        await axios.patch('http://localhost:4000/users/jlao', watchListUpdate)
+        if (!watchListArray.includes(e)){
+            setAlreadyAdded(false)
+            getStock(e)
+            watchListArray.push(e)
+            const watchListUpdate = { watchList: watchListArray}
+            await axios.patch('http://localhost:4000/users/jlao', watchListUpdate)
+        }
+        else{
+            setAlreadyAdded(true)
+        }
     }
 
     //function to get the list of options to display on the search bar upon user input
@@ -30,7 +36,7 @@ const Search = ({ getStock, watchListArray }) => {
                 .then(response => response.json())
                 .then(({ bestMatches }) => {
                     for (let key in bestMatches){
-                        if (bestMatches[key]['4. region'] === 'United States'){
+                        if (bestMatches[key]['4. region'] === 'United States' && bestMatches[key]['3. type'] === 'Equity'){
                             optionHolder.push({value: bestMatches[key]['1. symbol'], name: bestMatches[key]['2. name']})
                         }
                     }
@@ -55,6 +61,10 @@ const Search = ({ getStock, watchListArray }) => {
                     placeholder="Search Market"
                     autoFocus
                 />
+                {AlreadyAdded && 
+                <div className="alert alert-danger error-message alert-dismissible fade show" role="alert">
+                    This stock has already been added to the watch list.
+                </div>}     
         </div>
     )
 }
