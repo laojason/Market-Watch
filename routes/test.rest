@@ -5,8 +5,7 @@ POST http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "userid": "jlao",
-    "watchList": ["AMD", "AMZN", "GME", "AMC"] 
+    "cryptoList": ["BTC", "ETH", "LTC"]
 }
 
 ###
@@ -17,5 +16,5 @@ PATCH http://localhost:4000/users/jlao
 Content-Type: application/json
 
 {
-    "watchList": ["AMD", "AMZN", "GME", "AMC", "TSLA", "DIS"] 
+    "cryptoList": ["BTC", "ETH", "LTC", "DOGE", "USDT", "HEX", "BNB", "XLM"]
 }
